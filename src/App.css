@@ -1,42 +1,95 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+:root {
+  /* Work time theme */
+  --work-primary: #ff9a9e;
+  --work-background: #ffeaea;
+  --work-button-hover: #ff8589;
+
+  /* Break time theme */
+  --break-primary: #98e4c2;
+  --break-background: #e8f7f0;
+  --break-button-hover: #7ed4aa;
+
+  /* Common colors */
+  --text-color: #4a4a4a;
+}
+
+.background {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.5s ease;
+}
+.background.break-mode {
+  background-color: var(--break-background);
+}
+.background.work-mode {
+  background-color: var(--work-background);
+}
+
+.pomodoro {
+  background-color: white;
+  padding: 6rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.timer-label {
+  color: var(--text-color);
+  font-size: 3rem;
+  margin-bottom: 1rem;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.timer-display {
+  font-size: 6rem;
+  font-weight: bold;
+  transition: color 0.5s ease;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.timer-display.break-mode {
+  color: var(--break-primary);
+}
+.timer-display.work-mode {
+  color: var(--work-primary);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.control-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.control-button {
+  border: none;
+  color: white;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
   }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.control-button.break-mode {
+  background-color: var(--break-primary);
+}
+.control-button.break-mode:hover {
+  background-color: var(--break-button-hover);
 }
 
-.card {
-  padding: 2em;
+.control-button.work-mode {
+  background-color: var(--work-primary);
+}
+.control-button.work-mode:hover {
+  background-color: var(--work-button-hover);
 }
 
-.read-the-docs {
-  color: #888;
+.control-button.play-pause {
+  width: 6rem;
+  height: 6rem;
 }

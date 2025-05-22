@@ -1,0 +1,66 @@
+import { useState, useEffect } from 'react';
+import TimerDisplay from './TimerDisplay';
+import ControlButtons from './ControlButtons';
+import { playNotificationSound } from '../utils';
+
+const WORK_TIME = 2;
+const BREAK_TIME = 2;
+
+const Pomodoro = () => {
+  const [timeLeft, setTimeLeft] = useState(WORK_TIME);
+  const [isRunning, setIsRunning] = useState(false);
+  const [isBreak, setIsBreak] = useState(false);
+
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+
+  const toggleTimer = () => {
+    setIsRunning(!isRunning);
+  };
+
+  const resetTimer = () => {
+    setIsRunning(false);
+    setTimeLeft(isBreak ? BREAK_TIME : WORK_TIME);
+  };
+
+  const skipTimer = () => {
+    setIsRunning(false);
+    setIsBreak(!isBreak);
+    setTimeLeft(!isBreak ? BREAK_TIME : WORK_TIME);
+  };
+
+  useEffect(() => {
+    let interval;
+    if (isRunning && timeLeft > 0) {
+      interval = setInterval(() => {
+        setTimeLeft((prevTime) => prevTime - 1);
+      }, 1000);
+    } else if (timeLeft === 0) {
+      playNotificationSound();
+      setIsBreak(!isBreak);
+      setTimeLeft(!isBreak ? BREAK_TIME : WORK_TIME);
+      setIsRunning(false);
+    }
+    return () => clearInterval(interval);
+  }, [isRunning, timeLeft, isBreak]);
+
+  const theme = isBreak ? 'break-mode' : 'work-mode';
+
+  return (
+    <div className={`background ${theme}`}>
+      <div className="pomodoro">
+        <h2 className="timer-label">{isBreak ? 'Break' : 'Work'} Time</h2>
+        <TimerDisplay minutes={minutes} seconds={seconds} theme={theme} />
+        <ControlButtons
+          isRunning={isRunning}
+          onToggle={toggleTimer}
+          onReset={resetTimer}
+          onSkip={skipTimer}
+          theme={theme}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Pomodoro;
