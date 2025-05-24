@@ -21,34 +21,47 @@
   align-items: center;
   transition: background-color 0.5s ease;
 }
+
 .background.break-mode {
   background-color: var(--break-background);
 }
+
 .background.work-mode {
   background-color: var(--work-background);
 }
 
 .pomodoro {
   background-color: white;
-  padding: 6rem;
-  border-radius: 20px;
+  padding: 2rem;
+  border-radius: 50%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .timer-label {
   color: var(--text-color);
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
+
 .timer-display {
-  font-size: 6rem;
+  font-size: 4rem;
   font-weight: bold;
   transition: color 0.5s ease;
+  margin-bottom: 1rem;
 }
+
 .timer-display.break-mode {
   color: var(--break-primary);
 }
+
 .timer-display.work-mode {
   color: var(--work-primary);
 }
@@ -57,27 +70,31 @@
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-top: 1rem;
+  z-index: 1;
 }
 
 .control-button {
   border: none;
   color: white;
-  width: 5rem;
-  height: 5rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  svg {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
+.control-button svg {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 .control-button.break-mode {
   background-color: var(--break-primary);
 }
+
 .control-button.break-mode:hover {
   background-color: var(--break-button-hover);
 }
@@ -85,11 +102,18 @@
 .control-button.work-mode {
   background-color: var(--work-primary);
 }
+
 .control-button.work-mode:hover {
   background-color: var(--work-button-hover);
 }
 
 .control-button.play-pause {
-  width: 6rem;
-  height: 6rem;
+  width: 4rem;
+  height: 4rem;
+}
+
+.progress-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }

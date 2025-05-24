@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import TimerDisplay from './TimerDisplay';
 import ControlButtons from './ControlButtons';
 import { playNotificationSound } from '../utils';
@@ -14,6 +16,11 @@ const Pomodoro = () => {
 
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
+
+  const calculateProgress = () => {
+    const totalTime = isBreak ? BREAK_TIME : WORK_TIME;
+    return ((totalTime - timeLeft) / totalTime) * 100;
+  };
 
   const toggleTimer = () => {
     setIsRunning(!isRunning);
@@ -50,6 +57,20 @@ const Pomodoro = () => {
   return (
     <div className={`background ${theme}`}>
       <div className="pomodoro">
+        <div className="progress-wrapper">
+          <CircularProgressbar
+            value={calculateProgress()}
+            styles={buildStyles({
+              rotation: 0,
+              strokeLinecap: 'round',
+              pathTransitionDuration: 0.5,
+              pathColor: isBreak
+                ? 'var(--break-primary)'
+                : 'var(--work-primary)',
+              trailColor: '#f5f5f5',
+            })}
+          />
+        </div>
         <h2 className="timer-label">{isBreak ? 'Break' : 'Work'} Time</h2>
         <TimerDisplay minutes={minutes} seconds={seconds} theme={theme} />
         <ControlButtons
