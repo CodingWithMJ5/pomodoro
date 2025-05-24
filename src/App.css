@@ -1,8 +1,8 @@
 :root {
   /* Work time theme */
-  --work-primary: #ff9a9e;
-  --work-background: #ffeaea;
-  --work-button-hover: #ff8589;
+  --work-primary: #ec7063;
+  --work-background: #f5b7b1;
+  --work-button-hover: #f1948a;
 
   /* Break time theme */
   --break-primary: #98e4c2;
