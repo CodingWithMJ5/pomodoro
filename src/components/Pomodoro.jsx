@@ -3,8 +3,9 @@ import TimerDisplay from './TimerDisplay';
 import ControlButtons from './ControlButtons';
 import { playNotificationSound } from '../utils';
 
-const WORK_TIME = 2;
-const BREAK_TIME = 2;
+const SECONDS_IN_MINUTE = 60;
+const WORK_TIME = 25 * SECONDS_IN_MINUTE;
+const BREAK_TIME = 5 * SECONDS_IN_MINUTE;
 
 const Pomodoro = () => {
   const [timeLeft, setTimeLeft] = useState(WORK_TIME);
